@@ -1,3 +1,4 @@
+#pragma once
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -101,6 +102,5 @@ vector<string> dictionary = {
     "said",
     "so",
     "people",
-    "part", 
-    "yf"
+    "part"
 };

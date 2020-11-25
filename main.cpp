@@ -42,49 +42,39 @@ class TrieNode{
             current->isEndOfWord=true;                          //after adding all the characters in the for loop mark the last charcter as end of word
         }
 
+        bool search(string s){
 
+            TrieNode *current = this;
+
+            for(int i=0;i<s.length();i++){
+                int index = s[i]-'a';
+
+                if(current->children[index]==NULL){
+                    return false;
+                }
+                current = current->children[index];
+            }
+
+            return (current !=NULL && current->isEndOfWord);
+        }
 };
 
-bool search(TrieNode *root , string s){
 
-    TrieNode *current = root;
-
-    for(int i=0;i<s.length();i++){
-        int index = s[i]-'a';
-
-        if(current->children[index]==NULL){
-            return false;
-        }
-        current = current->children[index];
-    }
-
-    return (current !=NULL && current->isEndOfWord);
-}
 
 const char hashTable[10][5]
     = { "",    "",    "abc",  "def", "ghi",
         "jkl", "mno", "pqrs", "tuv", "wxyz" };
  
-void printWordsUtil(int number[], int curr_digit,
-                    char output[], int n, TrieNode *root)
+void printWordsUtil(int number[], int curr_digit, char output[], int n, TrieNode *root)
 {
-    // Base case, if current output word is prepared
-    int i;
-
-    // cout<<output<<endl;
     string ans(output);
-    // cout<<ans;
-    // cout<<root;
-    // cout<<ans;
     if (curr_digit == n ) {
-        if(search(root, ans))
+        if(root->search(ans))
             cout<<ans<<endl;
         return;
     }
- 
-    // Try all 3 possible characters for current digir in
-    // number[] and recur for remaining digits
-    for (i = 0; i < strlen(hashTable[number[curr_digit]]);
+
+    for (int i = 0; i < strlen(hashTable[number[curr_digit]]);
          i++) {
         output[curr_digit]
             = hashTable[number[curr_digit]][i];
@@ -109,12 +99,20 @@ int main(){
 
     TrieNode *root = new TrieNode ();
 
-    // string dictionary[] = {"bfh", "adg", "adh", "adiya"};
-    
     for (int i = 0; i < dictionary.size(); i++) 
         root->insert(dictionary[i]);   
 
-    int number[] = { 9, 3 };
-    int n = sizeof(number) / sizeof(number[0]);
+    string enteredNumber;
+    cout<<"Enter the number: ";
+    cin>>enteredNumber;
+
+    int n = enteredNumber.size();
+    int number[n];
+
+
+    for(int i=0;i<n;++i){
+        number[i] = enteredNumber[i]-'0';
+    }
+
     printWords(number, n, root);
 }
