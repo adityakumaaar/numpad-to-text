@@ -2,6 +2,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+// added "jmp", "jnr", "lor" to demonstrate various words with same number input sequence
 vector<string> dictionary = {
     "the",
     "at",
@@ -15,6 +17,7 @@ vector<string> dictionary = {
     "than",
     "and",
     "this",
+    "put",
     "an",
     "would",
     "first",
@@ -64,6 +67,9 @@ vector<string> dictionary = {
     "more",
     "long",
     "for",
+    "jmp",
+    "lor",
+    "jnr",
     "what",
     "other",
     "write",
@@ -79,6 +85,7 @@ vector<string> dictionary = {
     "see",
     "did",
     "as",
+    "data",
     "we",
     "many",
     "number",

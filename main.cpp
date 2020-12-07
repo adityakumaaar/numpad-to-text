@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
 #define ALPHABET_SIZE 26
-#include "dictionary.cpp"
+#include "dictionary.cpp"       // contains all the valid dictionary words
 
 using namespace std;
 
+int flag = 0;
 
 class TrieNode{
     public: 
@@ -69,18 +70,17 @@ void printWordsUtil(int number[], int curr_digit, char output[], int n, TrieNode
 {
     string ans(output);
     if (curr_digit == n ) {
-        if(root->search(ans))
+        if(root->search(ans)){
+            flag = 1;
             cout<<ans<<endl;
+        }
         return;
     }
 
-    for (int i = 0; i < strlen(hashTable[number[curr_digit]]);
-         i++) {
-        output[curr_digit]
-            = hashTable[number[curr_digit]][i];
+    for (int i = 0; i < strlen(hashTable[number[curr_digit]]);i++) {
+        output[curr_digit] = hashTable[number[curr_digit]][i];
         printWordsUtil(number, curr_digit + 1, output, n, root);
-        if (number[curr_digit] == 0
-            || number[curr_digit] == 1)
+        if (number[curr_digit] == 0 || number[curr_digit] == 1)
             return;
     }
 }
@@ -115,4 +115,8 @@ int main(){
     }
 
     printWords(number, n, root);
+
+    if(!flag){
+        cout<<"Match Not Found"<<endl;
+    }
 }
